@@ -51,14 +51,6 @@ Lane-Detection-ADAS/
 
 ---
 
-## Requirements
-
-| Library | Purpose |
-| OpenCV  | Image processing and video handling |
-| NumPy   | Numerical operations |
-
----
-
 ## Output
 
 The system displays:
