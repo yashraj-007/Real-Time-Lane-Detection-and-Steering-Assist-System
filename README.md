@@ -5,6 +5,27 @@ This project is a **real-time ADAS lane detection and steering assist system** b
 
 The system integrates **classical lane detection** with a **fallback road segmentation mode** to handle complex environments such as roads with faded or missing lane markings. Temporal smoothing and FPS synchronization ensure **stable and realistic steering guidance**, making this suitable for ADAS research and internship portfolios.
 
+## What this project solves:
+
+###Lane guidance on degraded roads:
+
+Uses classical computer vision to detect lane markings where they exist.
+
+###Fallback road detection:
+
+Automatically switches to estimating the drivable road center when lane lines are missing, enabling the vehicle to stay safely in the middle of the road.
+
+###Smooth, real-time steering decisions:
+
+Temporal smoothing prevents flickering or abrupt steering, improving stability and safety.
+
+###Adaptive to complex traffic conditions:
+
+Works on curved, rural, and crowded roads where traditional lane-only ADAS would fail.
+
+Impact:
+This approach increases the robustness and reliability of ADAS systems, making them safer for real-world scenarios where lanes are not clearly marked. It’s particularly relevant for countries with inconsistent road infrastructure, providing practical lane-keeping and steering guidance even under challenging conditions.
+
 ---
 
 ## Features
