@@ -7,21 +7,10 @@ The system integrates **classical lane detection** with a **fallback road segmen
 
 ## What this project solves:
 
-###Lane guidance on degraded roads:
-
-Uses classical computer vision to detect lane markings where they exist.
-
-###Fallback road detection:
-
-Automatically switches to estimating the drivable road center when lane lines are missing, enabling the vehicle to stay safely in the middle of the road.
-
-###Smooth, real-time steering decisions:
-
-Temporal smoothing prevents flickering or abrupt steering, improving stability and safety.
-
-###Adaptive to complex traffic conditions:
-
-Works on curved, rural, and crowded roads where traditional lane-only ADAS would fail.
+- Lane guidance on degraded roads
+- Fallback road detection
+- Smooth, real-time steering decisions
+- Adaptive to complex traffic conditions
 
 Impact:
 This approach increases the robustness and reliability of ADAS systems, making them safer for real-world scenarios where lanes are not clearly marked. It’s particularly relevant for countries with inconsistent road infrastructure, providing practical lane-keeping and steering guidance even under challenging conditions.
