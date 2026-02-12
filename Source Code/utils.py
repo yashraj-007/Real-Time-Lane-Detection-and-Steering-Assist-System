@@ -4,6 +4,7 @@ import numpy as np
 previous_left = None
 previous_right = None
 previous_angle = 90
+previous_road_center = None
 
 
 def detect_edges(frame):
@@ -152,8 +153,7 @@ def get_steering_angle(frame, lane_center, frame_center):
 
     offset = lane_center - frame_center
     angle = int(90 + offset * 0.1)
-
-    angle = int(previous_angle * 0.8 + angle * 0.2)
+    angle = int(previous_angle * 0.85 + angle * 0.15)
     previous_angle = angle
 
     return angle
@@ -172,3 +172,44 @@ def draw_steering_line(frame, angle):
     cv2.line(steering_image, (x1, y1), (x2, y2), (255, 0, 0), 5)
 
     return steering_image
+
+
+def get_road_center(frame):
+    global previous_road_center
+
+    height, width, _ = frame.shape
+    roi = frame[int(height * 0.6):height, :]
+
+    hsv = cv2.cvtColor(roi, cv2.COLOR_BGR2HSV)
+
+    lower = np.array([0, 0, 50])
+    upper = np.array([180, 80, 200])
+
+    mask = cv2.inRange(hsv, lower, upper)
+    mask = cv2.GaussianBlur(mask, (7, 7), 0)
+
+    moments = cv2.moments(mask)
+
+    if moments["m00"] > 10000:
+        cx = int(moments["m10"] / moments["m00"])
+        cx = int(previous_road_center * 0.8 + cx * 0.2) if previous_road_center is not None else cx
+        previous_road_center = cx
+        return cx, mask
+
+    return previous_road_center, mask
+
+
+def draw_road_path(frame, center_x, mask):
+    height, width, _ = frame.shape
+    overlay = frame.copy()
+
+    if center_x is not None:
+        cv2.line(
+            overlay,
+            (center_x, height),
+            (center_x, int(height * 0.6)),
+            (0, 200, 255),
+            6
+        )
+
+    return cv2.addWeighted(frame, 1, overlay, 0.7, 0)
